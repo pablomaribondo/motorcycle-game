@@ -22,7 +22,10 @@ class Game {
     player.speed -= (player.speed - (keys.ArrowUp - keys.ArrowDown)) * 0.01;
     this.frames += 10 * player.speed;
 
-    context.fillStyle = "#19f";
+    const sunsetGradient = context.createLinearGradient(0, 0, 74, 315);
+    sunsetGradient.addColorStop(0, "#fc9842");
+    sunsetGradient.addColorStop(1, "#fe5f75");
+    context.fillStyle = sunsetGradient;
     context.fillRect(0, 0, canvas.width, canvas.height);
 
     context.fillStyle = "rgba(0,0,0,0.25)";
@@ -39,7 +42,7 @@ class Game {
     context.lineTo(canvas.width, canvas.height);
     context.fill();
 
-    context.fillStyle = "#444";
+    context.fillStyle = "#802F3A";
     context.beginPath();
     context.moveTo(0, canvas.height);
 
@@ -59,8 +62,17 @@ class Game {
     requestAnimationFrame(this.loop.bind(this));
   }
 
-  // TODO: implementar o método restart
-  restart() {}
+  restart() {
+    player.reset();
+
+    this.frames = 0;
+    this.playing = true;
+
+    keys.ArrowUp = 0;
+    keys.ArrowRight = 0;
+    keys.ArrowDown = 0;
+    keys.ArrowLeft = 0;
+  }
 }
 
 export default new Game();
